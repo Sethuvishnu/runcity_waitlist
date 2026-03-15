@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { FaInstagram } from "react-icons/fa";
 import ResultScroller from "./ResultScroller";
-import logo from "./assets/logo_fav.png";
+import logo from "./assets/logo_main.png";
 
 function App() {
   const [email, setEmail] = useState("");
