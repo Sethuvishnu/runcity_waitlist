@@ -47,6 +47,9 @@ html, body {
   font-weight:700;
   letter-spacing:1px;
 }
+
+
+
 .logo-text{
   font-size:50px;
   font-weight:1000;
@@ -81,7 +84,7 @@ html, body {
 
 .small-text{
   font-weight:500;
-  color:#aaa;
+  color:#929292;
   font-size:30px;
 }
 
@@ -92,7 +95,8 @@ html, body {
 }
 
 .match{
-  color:#0066ff;
+  color:#c8ff00;
+  /* filter: drop-shadow(3px 3px 0px #ffffff); */
 }
 
 
@@ -125,17 +129,18 @@ html, body {
   padding:14px 22px;
   border:none;
   border-radius:8px;
-  background:#0066ff;
-  color:white;
+  background:#c8ff00;
+  color:rgb(0, 0, 0);
   font-weight:600;
   cursor:pointer;
   transition:0.3s;
   display: flex;
   gap: 12px;
+  
 }
 
 .submit-button:hover{
-  background:#ffc400;
+  background:#ff5500;
 }
 
 .Early-Adoptor{
