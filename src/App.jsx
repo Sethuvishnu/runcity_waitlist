@@ -18,7 +18,7 @@ function App() {
 
     try {
       // const response = await fetch("https://email-grab.onrender.com/waitlist", {
-      const response = await fetch("https://runcity-waitlist.onrender.com/waitlist", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/waitlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
