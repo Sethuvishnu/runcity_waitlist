@@ -11,14 +11,19 @@ function App() {
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("white"); // Message color state
 
+
+  const API = process.env.REACT_APP_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email.trim() === "" || name.trim() === "") return;
+   
 
     try {
+       console.log(process.env.REACT_APP_API_URL);
+       console.log(333);
       // const response = await fetch("https://email-grab.onrender.com/waitlist", {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/waitlist`, {
+      const response = await fetch(`${API}/waitlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
@@ -56,7 +61,7 @@ function App() {
         <img src={logo} alt="RunCity Logo" className="logo-img" />
       </div>
         <div className="logo-text">RunCity</div>
-        <a href="https://instagram.com" className="insta">
+        <a href="https://www.instagram.com/runcityy?igsh=ejd4eDB2c3BxdmVh" className="insta">
           <FaInstagram size={28} />
         </a>
       </div>
