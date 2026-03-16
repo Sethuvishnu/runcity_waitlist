@@ -12,7 +12,7 @@ function App() {
   const [messageColor, setMessageColor] = useState("white"); // Message color state
 
 
-  const API = process.env.REACT_APP_API_URL;
+ const API = import.meta.env.VITE_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,8 +20,7 @@ function App() {
    
 
     try {
-       console.log(process.env.REACT_APP_API_URL);
-       console.log(333);
+      
       // const response = await fetch("https://email-grab.onrender.com/waitlist", {
       const response = await fetch(`${API}/waitlist`, {
         method: "POST",
