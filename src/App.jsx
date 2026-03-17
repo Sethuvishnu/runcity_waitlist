@@ -11,9 +11,9 @@ function App() {
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("white"); // Message color state
 
-console.log(123);
+
  const API = import.meta.env.VITE_API_URL;
-  console.log(API);
+  
   
   const handleSubmit = async (e) => {
     e.preventDefault();
