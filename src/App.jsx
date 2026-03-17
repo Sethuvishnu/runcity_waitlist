@@ -11,9 +11,10 @@ function App() {
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("white"); // Message color state
 
-
+console.log(123);
  const API = import.meta.env.VITE_API_URL;
   console.log(API);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -21,6 +22,7 @@ function App() {
    
 
     try {
+      
       
       // const response = await fetch("https://email-grab.onrender.com/waitlist", {
       const response = await fetch(`${API}/waitlist`, {
