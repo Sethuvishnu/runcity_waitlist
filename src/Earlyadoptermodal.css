@@ -1,0 +1,204 @@
+/* ── Trigger button ───────────────────────────────────────────────── */
+.Early-Adoptor {
+  padding: 14px 22px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.Early-Adoptor:hover {
+  background: #ffffff;
+  color: #0008ff;
+}
+
+/* ── Overlay ──────────────────────────────────────────────────────── */
+.ea-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: ea-fadeIn 0.2s ease;
+}
+
+@keyframes ea-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Modal card ───────────────────────────────────────────────────── */
+.ea-modal {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 12px;
+  width: 460px;
+  max-width: 92vw;
+  padding: 32px 28px 24px;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: ea-slideUp 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes ea-slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Close button ─────────────────────────────────────────────────── */
+.ea-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #666;
+  cursor: pointer;
+  line-height: 1;
+  transition: 0.3s;
+}
+.ea-close:hover {
+  color: #fff;
+}
+
+/* ── Badge ────────────────────────────────────────────────────────── */
+.ea-badge {
+  display: inline-block;
+  background: transparent;
+  border: 1px solid #444;
+  color: #aaa;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+  letter-spacing: 0.4px;
+}
+
+/* ── Heading ──────────────────────────────────────────────────────── */
+.ea-modal h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px;
+}
+
+.ea-sub {
+  font-size: 13px;
+  color: #777;
+  margin: 0 0 22px;
+}
+
+/* ── Rules list ───────────────────────────────────────────────────── */
+.ea-rules {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ea-rules li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ea-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  line-height: 1.3;
+}
+
+.ea-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ea-text strong {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.ea-text span {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ── Divider ──────────────────────────────────────────────────────── */
+.ea-divider {
+  height: 1px;
+  background: #2a2a2a;
+  margin: 0 0 20px;
+}
+
+/* ── Action buttons ───────────────────────────────────────────────── */
+.ea-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.ea-btn-secondary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: transparent;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.ea-btn-secondary:hover {
+  background: #ffffff;
+  color: #0008ff;
+  border-color: #ffffff;
+}
+
+.ea-btn-primary {
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid #0008ff;
+  background: transparent;
+  color: #0008ff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.ea-btn-primary:hover {
+  background: #0008ff;
+  color: #ffffff;
+}
+
+/* ── Post-join message ────────────────────────────────────────────── */
+.ea-joined-msg {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #0008ff;
+  font-weight: 500;
+}
+
+
+/* ── Error message ────────────────────────────────────────────────── */
+.ea-error {
+  font-size: 13px;
+  color: #ff3b3b;
+  margin: 0 0 12px;
+  text-align: center;
+}
+
+/* ── Disabled state ───────────────────────────────────────────────── */
+.ea-btn-primary:disabled,
+.ea-btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
