@@ -3,7 +3,7 @@ import "./App.css";
 import { FaInstagram } from "react-icons/fa";
 import ResultScroller from "./ResultScroller";
 import logo from "./assets/logo_main.png";
-import EarlyAdopterModal from "./Earlyadoptermodal";
+import Payment from "./Payment";
 
 
 function App() {
@@ -99,7 +99,7 @@ function App() {
            <div className="button-group">
     <button className="submit-button">Join Waitlist</button>
     {/* <button type="button" className="Early-Adoptor">Early-Adoptor</button> */}
-    <EarlyAdopterModal />
+    <Payment />
   </div>
   
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./EarlyAdopterModal.css";
+import "./Payment.css";
 
 const rules = [
   {
@@ -24,7 +24,7 @@ const rules = [
   },
 ];
 
-function EarlyAdopterModal() {
+function Payment() {
    const API = import.meta.env.VITE_API_URL ; // Fallback to localhost if env variable is not set
 
 
@@ -127,4 +127,4 @@ function EarlyAdopterModal() {
   );
 }
 
-export default EarlyAdopterModal;
+export default Payment;
