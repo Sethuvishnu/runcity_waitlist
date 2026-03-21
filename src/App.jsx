@@ -3,7 +3,7 @@ import "./App.css";
 import { FaInstagram } from "react-icons/fa";
 import ResultScroller from "./ResultScroller";
 import logo from "./assets/logo_main.png";
-import EarlyAdopterModal from "./EarlyAdopterModal";
+import EarlyAdopterModal from "./Earlyadoptermodal";
 
 
 function App() {
