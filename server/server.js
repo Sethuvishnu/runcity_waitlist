@@ -9,8 +9,8 @@ const app = express();
 
 // ── Middleware ─────────────────────────────────────────────────────
 app.use(cors({
-  origin: ["http://localhost:5500", "http://localhost:3000", "http://localhost:5173"],
-}));
+  origin: 'https://runcity-waitlist.vercel.app'
+}))
 app.use(express.json());
 
 // ── Stripe ─────────────────────────────────────────────────────────
