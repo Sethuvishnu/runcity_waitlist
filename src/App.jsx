@@ -3,6 +3,9 @@ import "./App.css";
 import { FaInstagram } from "react-icons/fa";
 import ResultScroller from "./ResultScroller";
 import logo from "./assets/logo_main.png";
+import EarlyAdopterModal from "./Earlyadoptermodal";
+
+
 
 function App() {
   const [email, setEmail] = useState("");
@@ -13,8 +16,7 @@ function App() {
 
 
  const API = import.meta.env.VITE_API_URL;
-  
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -98,7 +100,10 @@ function App() {
            <div className="button-group">
     <button className="submit-button">Join Waitlist</button>
     {/* <button type="button" className="Early-Adoptor">Early-Adoptor</button> */}
+    <EarlyAdopterModal />
   </div>
+  
+
         </form>
 
         {/* <div className="number">Number of members joined : {members}</div> */}
