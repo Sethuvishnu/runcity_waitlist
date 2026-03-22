@@ -21,7 +21,7 @@ app.use(express.json());
 // ── Stripe ─────────────────────────────────────────────────────────
 
 const storeItems = new Map([
-  [1, { priceInCents: 500,   name: "Early Adopter — Lifetime Access" }],
+  [1, { priceInCents: 99900,   name: "Early Adopter — Lifetime Access" }],
   [2, { priceInCents: 20000, name: "Learn CSS Today" }],
 ]);
 
