@@ -140,7 +140,7 @@ function Payment() {
                 onClick={handleJoin}
                 disabled={loading}
               >
-                {loading ? "Redirecting..." : "Pay $5 and Join"}
+                {loading ? "Redirecting..." : "Pay 999Rs and Join"}
               </button>
             </div>
           </div>
