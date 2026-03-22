@@ -72,7 +72,7 @@ function Payment() {
             },
           },
           prefill: {
-            email: userEmail,
+            email: "",
           },
           theme: {
             color: "#000000",
