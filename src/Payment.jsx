@@ -60,7 +60,7 @@ function Payment() {
           description: "Early Adopter — Lifetime Access",
 
 
-
+          
           handler: function (response) {
             // payment successful
             window.location.href = "https://runcity-waitlist.vercel.app/success";
@@ -71,11 +71,9 @@ function Payment() {
               setError("Payment cancelled. Please try again.");
             },
           },
-              prefill: {
-      name: "User Name",
-      email: userEmail,   // 👈 SET HERE
-      contact: ""         // 👈 leave empty or pass if you have it
-    },
+          prefill: {
+            email: "",
+          },
           theme: {
             color: "#000000",
           },
