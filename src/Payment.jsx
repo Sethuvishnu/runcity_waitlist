@@ -35,27 +35,50 @@ function Payment() {
 
 
 
-  const handleJoin = () => {
+    const handleJoin = () => {
     setLoading(true);
     setError("");
 
     fetch(`${API}/create-checkout-session`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        items: [
-          { id: 1, quantity: 1 },
-        ],
+        items: [{ id: 1, quantity: 1 }],
       }),
     })
       .then((res) => {
         if (res.ok) return res.json();
         return res.json().then((json) => Promise.reject(json));
       })
-      .then(({ url }) => {
-        window.location = url;
+      .then(({ order }) => {
+        const options = {
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+          amount: order.amount,
+          currency: order.currency,
+          order_id: order.id,
+          name: "RunCity",
+          description: "Early Adopter — Lifetime Access",
+          handler: function (response) {
+            // payment successful
+            window.location.href = "https://runcity-waitlist.vercel.app/success";
+          },
+          modal: {
+            ondismiss: function () {
+              setLoading(false);
+              setError("Payment cancelled. Please try again.");
+            },
+          },
+          prefill: {
+            email: "",
+          },
+          theme: {
+            color: "#000000",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+        setLoading(false);
       })
       .catch((e) => {
         console.error(e.error);
