@@ -59,10 +59,6 @@ function Payment() {
           name: "RunCity",
           description: "Early Adopter — Lifetime Access",
 
-           prefill: {
-            email: userEmail,
-          },
-
 
           
           handler: function (response) {
@@ -75,7 +71,9 @@ function Payment() {
               setError("Payment cancelled. Please try again.");
             },
           },
-         
+          prefill: {
+            email: userEmail,
+          },
           theme: {
             color: "#000000",
           },
