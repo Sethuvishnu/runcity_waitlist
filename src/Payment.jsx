@@ -5,22 +5,22 @@ const rules = [
   {
     icon: "🚀",
     title: "Early access before anyone else",
-    desc: "Be the first to use new features, tools, and updates before they roll out to everyone.",
+    
   },
   {
     icon: "🔒",
     title: "Lifetime membership",
-    desc: "Pay once and stay in — your early adopter status never expires.",
+   
   },
   {
     icon: "✅",
     title: "Cancel anytime, full refund",
-    desc: "Not happy? Cancel within the refund window and get every penny back, no questions asked.",
+    
   },
   {
     icon: "🏅",
     title: "Unlock badges, rewards, trails",
-    desc: "Earn exclusive badges and rewards as you explore new features and hit milestones.",
+    
   },
 ];
 
@@ -58,6 +58,9 @@ function Payment() {
           order_id: order.id,
           name: "RunCity",
           description: "Early Adopter — Lifetime Access",
+
+
+
           handler: function (response) {
             // payment successful
             window.location.href = "https://runcity-waitlist.vercel.app/success";
@@ -68,9 +71,11 @@ function Payment() {
               setError("Payment cancelled. Please try again.");
             },
           },
-          prefill: {
-            email: "",
-          },
+              prefill: {
+      name: "User Name",
+      email: userEmail,   // 👈 SET HERE
+      contact: ""         // 👈 leave empty or pass if you have it
+    },
           theme: {
             color: "#000000",
           },
@@ -117,7 +122,7 @@ function Payment() {
                   <span className="ea-icon">{rule.icon}</span>
                   <span className="ea-text">
                     <strong>{rule.title}</strong>
-                    <span>{rule.desc}</span>
+                    {/* <span>{rule.desc}</span> */}
                   </span>
                 </li>
               ))}
