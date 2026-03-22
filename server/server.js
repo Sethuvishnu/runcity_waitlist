@@ -4,8 +4,13 @@ require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const Razorpay = require("razorpay");
 
 const app = express();
+const razorpay = new Razorpay({
+  key_id: process.env.LIVE_KEY_ID,
+  key_secret: process.env.LIVE_KEY_SECRET
+});
 
 // ── Middleware ─────────────────────────────────────────────────────
 app.use(cors({
@@ -14,7 +19,6 @@ app.use(cors({
 app.use(express.json());
 
 // ── Stripe ─────────────────────────────────────────────────────────
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const storeItems = new Map([
   [1, { priceInCents: 500,   name: "Early Adopter — Lifetime Access" }],
@@ -54,24 +58,18 @@ app.post("/waitlist", async (req, res) => {
 
 app.post("/create-checkout-session", async (req, res) => {
   try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      mode: "payment",
-      line_items: req.body.items.map((item) => {
-        const storeItem = storeItems.get(item.id);
-        return {
-          price_data: {
-            currency: "usd",
-            product_data: { name: storeItem.name },
-            unit_amount: storeItem.priceInCents,
-          },
-          quantity: item.quantity,
-        };
-      }),
-      success_url: `${process.env.SERVER_URL}/success.html`,
-      cancel_url:  `${process.env.SERVER_URL}/cancel.html`,
+    const totalAmount = req.body.items.reduce((total, item) => {
+      const storeItem = storeItems.get(item.id);
+      return total + storeItem.priceInCents * item.quantity;
+    }, 0);
+
+    const order = await razorpay.orders.create({
+      amount: totalAmount,        // in paise (500 = ₹5, same scale as cents)
+      currency: "INR",
+      receipt: "receipt_" + Date.now(),
     });
-    res.json({ url: session.url });
+
+    res.json({ order });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
