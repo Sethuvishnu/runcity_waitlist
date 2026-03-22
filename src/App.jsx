@@ -8,24 +8,22 @@ import Payment from "./Payment";
 
 function App() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState(""); // Name state
+  const [name, setName] = useState("");
   const [members, setMembers] = useState(423);
   const [message, setMessage] = useState("");
-  const [messageColor, setMessageColor] = useState("white"); // Message color state
+  const [messageColor, setMessageColor] = useState("white");
+  const [submitting, setSubmitting] = useState(false); // ← added
 
-
- const API = import.meta.env.VITE_API_URL;
+  const API = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email.trim() === "" || name.trim() === "") return;
-   
+
+    setSubmitting(true); // ← start loading
 
     try {
-      
-      
-      // const response = await fetch("https://email-grab.onrender.com/waitlist", {
       const response = await fetch(`${API}/waitlist`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -41,7 +39,7 @@ function App() {
         setName("");
 
         if (data.total !== undefined) {
-          setMembers(data.total + 423); // optional offset
+          setMembers(data.total + 423);
         }
       } else {
         setMessage("Something went wrong. Please try again.");
@@ -51,18 +49,17 @@ function App() {
       console.error(error);
       setMessage("Something went wrong. Please try again.");
       setMessageColor("red");
+    } finally {
+      setSubmitting(false); // ← stop loading
     }
   };
 
   return (
     <div className="container">
-      {/* Circular Logo */}
-      
-
       <div className="topbar">
         <div className="logo-circle">
-        <img src={logo} alt="RunCity Logo" className="logo-img" />
-      </div>
+          <img src={logo} alt="RunCity Logo" className="logo-img" />
+        </div>
         <div className="logo-text">RunCity</div>
         <a href="https://www.instagram.com/runcityy?igsh=ejd4eDB2c3BxdmVh" className="insta">
           <FaInstagram size={28} />
@@ -96,16 +93,17 @@ function App() {
             required
           />
 
-           <div className="button-group">
-    <button className="submit-button">Join Waitlist</button>
-    {/* <button type="button" className="Early-Adoptor">Early-Adoptor</button> */}
-    <Payment />
-  </div>
-  
+          <div className="button-group">
+            <button
+              className="submit-button"
+              disabled={submitting}
+            >
+              {submitting ? "Joining..." : "Join Waitlist"}
+            </button>
+            <Payment />
+          </div>
 
         </form>
-
-        {/* <div className="number">Number of members joined : {members}</div> */}
 
         <div
           className="message"
@@ -113,10 +111,6 @@ function App() {
         >
           {message}
         </div>
-
-        {/* <div className="scroller-container">
-          <ResultScroller />
-        </div> */}
       </div>
     </div>
   );
