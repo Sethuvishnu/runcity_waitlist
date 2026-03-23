@@ -100,7 +100,7 @@ function App() {
             >
               {submitting ? "Joining..." : "Join Waitlist"}
             </button>
-            <Payment />
+            {/* <Payment /> */}
           </div>
 
         </form>
