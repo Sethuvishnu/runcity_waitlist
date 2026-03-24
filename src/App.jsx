@@ -12,7 +12,8 @@ function App() {
   const [members, setMembers] = useState(423);
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("white");
-  const [submitting, setSubmitting] = useState(false); // ← added
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false); // ← new
 
   const API = import.meta.env.VITE_API_URL;
 
@@ -21,7 +22,7 @@ function App() {
 
     if (email.trim() === "" || name.trim() === "") return;
 
-    setSubmitting(true); // ← start loading
+    setSubmitting(true);
 
     try {
       const response = await fetch(`${API}/waitlist`, {
@@ -33,10 +34,9 @@ function App() {
       const data = await response.json();
 
       if (data.success) {
-        setMessage("Thank you! You are on the waitlist 🚀");
-        setMessageColor("lightgreen");
         setEmail("");
         setName("");
+        setSubmitted(true); // ← trigger success UI
 
         if (data.total !== undefined) {
           setMembers(data.total + 423);
@@ -50,7 +50,7 @@ function App() {
       setMessage("Something went wrong. Please try again.");
       setMessageColor("red");
     } finally {
-      setSubmitting(false); // ← stop loading
+      setSubmitting(false);
     }
   };
 
@@ -74,43 +74,51 @@ function App() {
         </h1>
         <h1 className="small-text">Climb the global rankings.</h1>
 
-        <form className="waitlistForm" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Your Name"
-            className="input-field"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-
-          <div className="button-group">
-            <button
-              className="submit-button"
-              disabled={submitting}
-            >
-              {submitting ? "Joining..." : "Join Waitlist"}
-            </button>
-            {/* <Payment /> */}
+        {submitted ? (
+          /* ── Success State ── */
+          <div className="success-state">
+            <div className="success-icon">🚀</div>
+            <h2 className="success-title">You're on the list!</h2>
+            <p className="success-sub">We'll see you at the start line.</p>
+            <div className="success-badge">#{members} runners and counting</div>
           </div>
+        ) : (
+          /* ── Form ── */
+          <>
+            <form className="waitlistForm" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="input-field"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
 
-        </form>
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="input-field"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
 
-        <div
-          className="message"
-          style={{ color: messageColor, margin: "20px 0" }}
-        >
-          {message}
-        </div>
+              <div className="button-group">
+                <button className="submit-button" disabled={submitting}>
+                  {submitting ? "Joining..." : "Join Waitlist"}
+                </button>
+                {/* <Payment /> */}
+              </div>
+            </form>
+
+            {message && (
+              <div className="message" style={{ color: messageColor, margin: "20px 0" }}>
+                {message}
+              </div>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
