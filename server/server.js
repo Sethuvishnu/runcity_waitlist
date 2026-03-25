@@ -58,14 +58,16 @@ app.post("/waitlist", async (req, res) => {
 
 app.post("/create-checkout-session", async (req, res) => {
   try {
-    const totalAmount = req.body.items.reduce((total, item) => {
+    // Calculate total in **USD cents**
+    const totalAmountUSD = req.body.items.reduce((total, item) => {
       const storeItem = storeItems.get(item.id);
       return total + storeItem.priceInCents * item.quantity;
     }, 0);
 
+    // Create Razorpay order in USD
     const order = await razorpay.orders.create({
-      amount: totalAmount,        // in paise (500 = ₹5, same scale as cents)
-      currency: "INR",
+      amount: totalAmountUSD,      // in **cents**, e.g., 99900 = $999.00
+      currency: "USD",             // changed from INR to USD
       receipt: "receipt_" + Date.now(),
     });
 
@@ -74,7 +76,6 @@ app.post("/create-checkout-session", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
-
 // ── Start ────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
