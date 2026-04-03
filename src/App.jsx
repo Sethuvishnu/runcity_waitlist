@@ -34,7 +34,7 @@ function App() {
       const data = await response.json();
 
       if (data.success) {
-        setMessage("Thank you! You are on the waitlist 🚀");
+        setMessage("Thank you! You are on the waitlist 🎉");
         setMessageColor("lightgreen");
         setEmail("");
         setName("");
