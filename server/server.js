@@ -14,6 +14,7 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 
 
+
 // ── Firebase Admin ──────────────────────────────────────────────────
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -28,6 +29,7 @@ const razorpay = new Razorpay({
 
 // ── Middleware ──────────────────────────────────────────────────────
 app.use(cors({ origin: "https://runcity-waitlist.vercel.app" }));
+
 app.use(express.json());
 
 // ── Store items ─────────────────────────────────────────────────────
