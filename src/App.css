@@ -90,7 +90,7 @@ html, body {
 }
 
 .match {
-  color: #c8ff00;
+  color: #0800ff;
 }
 
 /* ---------------- FORM ---------------- */
@@ -130,7 +130,7 @@ html, body {
   padding: 14px 22px;
   border: none;
   border-radius: 8px;
-  background: #c8ff00;
+  background: #ffffff;
   color: rgb(0, 0, 0);
   font-weight: 600;
   cursor: pointer;
@@ -270,8 +270,8 @@ html, body {
 /* ---------------- LOGO ---------------- */
 
 .logo-img {
-  height: 40px;
-  width: 40px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   object-fit: cover;
   padding: 5px;
