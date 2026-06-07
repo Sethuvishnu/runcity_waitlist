@@ -3,89 +3,95 @@ require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 
 const express = require("express");
 const cors = require("cors");
-const Razorpay = require("razorpay");
 const admin = require("firebase-admin");
-const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-
-
-
-
-
 
 
 
 
 // ── Firebase Admin ──────────────────────────────────────────────────
+const serviceAccount = require("./serviceAccount.json"); // <-- uses local file
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 const db = admin.firestore();
 
 const app = express();
-const razorpay = new Razorpay({
-  key_id: process.env.LIVE_KEY_ID,
-  key_secret: process.env.LIVE_KEY_SECRET,
-});
 
 // ── Middleware ──────────────────────────────────────────────────────
-app.use(cors({ origin: "https://runcity-waitlist.vercel.app" }));
-
+app.use(cors({
+  origin: [
+    "https://runcity-waitlist.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:3000",
+  ]
+}));
 app.use(express.json());
-
-// ── Store items ─────────────────────────────────────────────────────
-const storeItems = new Map([
-  [1, { priceInCents: 99900, name: "Early Adopter — Lifetime Access" }],
-  [2, { priceInCents: 20000, name: "Learn CSS Today" }],
-]);
 
 // ── Routes ──────────────────────────────────────────────────────────
 
+// Health check
+app.get("/", (req, res) => {
+  res.json({ status: "ok", service: "Runcity API" });
+});
+
+// Join waitlist
 app.post("/waitlist", async (req, res) => {
   const { email, name } = req.body;
+
+  if (!email || !name) {
+    return res.status(400).json({ success: false, message: "Name and email are required" });
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ success: false, message: "Invalid email address" });
+  }
+
   try {
     const emailsRef = db.collection("emails");
 
-    // Check for duplicate
-    const existing = await emailsRef.where("email", "==", email).limit(1).get();
+    // Check duplicate
+    const existing = await emailsRef.where("email", "==", email.toLowerCase()).limit(1).get();
     if (!existing.empty) {
-      return res.status(400).json({ success: false, message: "Email already in waitlist" });
+      return res.status(400).json({ success: false, message: "You're already on the waitlist!" });
     }
 
-    // Save new entry
-    await emailsRef.add({ name, email, createdAt: admin.firestore.FieldValue.serverTimestamp() });
+    // Save entry
+    await emailsRef.add({
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
 
-    // Count total
+    // Get total count
     const countSnap = await emailsRef.count().get();
     const count = countSnap.data().count;
 
-    res.status(200).json({ success: true, message: "Email saved!", total: count });
+    res.status(200).json({
+      success: true,
+      message: "You're on the list!",
+      total: count,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Error saving email" });
+    console.error("Waitlist error:", error);
+    res.status(500).json({ success: false, message: "Something went wrong. Try again." });
   }
 });
 
-app.post("/create-checkout-session", async (req, res) => {
+// Get waitlist count (for displaying live count on frontend)
+app.get("/waitlist/count", async (req, res) => {
   try {
-    const totalAmountUSD = req.body.items.reduce((total, item) => {
-      const storeItem = storeItems.get(item.id);
-      return total + storeItem.priceInCents * item.quantity;
-    }, 0);
-
-    const order = await razorpay.orders.create({
-      amount: totalAmountUSD,
-      currency: "USD",
-      receipt: "receipt_" + Date.now(),
-    });
-
-    res.json({ order });
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+    const countSnap = await db.collection("emails").count().get();
+    const count = countSnap.data().count;
+    res.status(200).json({ success: true, total: count });
+  } catch (error) {
+    console.error("Count error:", error);
+    res.status(500).json({ success: false, message: "Could not fetch count" });
   }
 });
 
 // ── Start ────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Runcity API running at http://localhost:${PORT}`);
 });
