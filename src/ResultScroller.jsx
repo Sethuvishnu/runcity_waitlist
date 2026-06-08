@@ -1,83 +1,34 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./ResultScroller.css";
 
-function ResultScroller() {
-
+export default function ResultScroller() {
   useEffect(() => {
-
     const scrollers = document.querySelectorAll(".result");
-
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      addAnimation();
-    }
-
-    function addAnimation() {
-
       scrollers.forEach((scroller) => {
-
+        if (scroller.getAttribute("data-animated")) return; // prevent double-init
         scroller.setAttribute("data-animated", true);
-
-        const scrollerInner = scroller.querySelector(".result-list");
-        const scrollerContent = Array.from(scrollerInner.children);
-
-        scrollerContent.forEach((item) => {
-
-          const duplicatedItem = item.cloneNode(true);
-          duplicatedItem.setAttribute("aria-hidden", true);
-
-          scrollerInner.appendChild(duplicatedItem);
-
+        const inner = scroller.querySelector(".result-list");
+        Array.from(inner.children).forEach((item) => {
+          const clone = item.cloneNode(true);
+          clone.setAttribute("aria-hidden", true);
+          inner.appendChild(clone);
         });
-
       });
-
     }
-
   }, []);
 
+  const images = ["s1", "ss1", "s2", "ss2", "s3", "ss3", "s4", "ss4"];
+
   return (
-
     <div className="result">
-
       <ul className="result-list">
-
-        <li className="result-row">
-          <img src="/image/s1.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/ss1.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/s2.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/ss2.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/s3.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/ss3.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/s4.png" alt="result"/>
-        </li>
-
-        <li className="result-row">
-          <img src="/image/ss4.png" alt="result"/>
-        </li>
-
+        {images.map((name) => (
+          <li className="result-row" key={name}>
+            <img src={`/image/${name}.png`} alt="result" />
+          </li>
+        ))}
       </ul>
-
     </div>
-
   );
 }
-
-export default ResultScroller;
