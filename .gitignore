@@ -27,3 +27,8 @@ server\.env.production
 *.sln
 *.sw?
 
+
+serviceAccount.json
+serviceAccount.json.json
+"serviceAccount.json" 
+"serviceAccount.json.json" 
