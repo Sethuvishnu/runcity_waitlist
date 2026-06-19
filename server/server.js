@@ -20,9 +20,12 @@ const app = express();
 // ── Middleware ──────────────────────────────────────────────────────
 app.use(cors({
   origin: [
-    "https://runcity-waitlist.vercel.app",
+    
     "http://localhost:5173",
     "http://localhost:3000",
+    'https://runcity.xyz',
+    'https://www.runcity.xyz',
+    'https://runcity-waitlist.vercel.app'
   ]
 }));
 app.use(express.json());
