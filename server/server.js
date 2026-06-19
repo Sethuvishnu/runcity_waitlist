@@ -9,7 +9,8 @@ const admin = require("firebase-admin");
 
 
 // ── Firebase Admin ──────────────────────────────────────────────────
-const serviceAccount = require("./serviceAccount.json"); // <-- uses local file
+// const serviceAccount = require("./serviceAccount.json"); // <-- uses local file
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
