@@ -59,9 +59,17 @@ export default function WaitlistForm({ buttonLabel = "Join the waitlist", onSucc
         required
         autoComplete="off"
       />
-      <button type="submit" disabled={submitting}>
-        {submitting ? "Joining..." : buttonLabel}
+
+      {/* ✅ Button with spinner */}
+      <button type="submit" disabled={submitting} className={submitting ? "btn-loading" : ""}>
+        {submitting ? (
+          <>
+            <span className="btn-spinner" />
+            Joining...
+          </>
+        ) : buttonLabel}
       </button>
+
       {message.text && (
         <div className={`form-message ${message.type}`}>{message.text}</div>
       )}
