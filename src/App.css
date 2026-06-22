@@ -3,16 +3,16 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg:            #05050f;
-  --fg:            #ffffff;
-  --fg-dim:        #8888aa;
-  --muted:         #44445a;
-  --accent:        #2244ff;
-  --accent-bright: #4d6aff;
-  --accent-glow:   rgba(34,68,255,0.2);
-  --accent-strong: rgba(34,68,255,0.5);
-  --border:        rgba(255,255,255,0.06);
-  --border-blue:   rgba(77,106,255,0.35);
+  --bg:            #ffffff;
+  --fg:            #0a0a0f;
+  --fg-dim:        #666680;
+  --muted:         #aaaabc;
+  --accent:        #0099ee;
+  --accent-bright: #00aaff;
+  --accent-glow:   rgba(0,170,255,0.12);
+  --accent-strong: rgba(0,170,255,0.25);
+  --border:        rgba(0,0,0,0.08);
+  --border-blue:   rgba(0,170,255,0.3);
   --display: 'Bebas Neue', sans-serif;
   --body:    'Inter', sans-serif;
   --mono:    'DM Mono', monospace;
@@ -50,7 +50,7 @@ body {
   padding: 22px 52px; transition: all 0.4s;
 }
 .rc-nav.scrolled {
-  background: rgba(5,5,15,0.92);
+  background: rgba(255,255,255,0.92);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -99,8 +99,8 @@ body {
   animation: pulse 5s ease-in-out infinite;
 }
 @keyframes pulse {
-  0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
-  50%      { opacity: 1;   transform: translate(-50%,-50%) scale(1.1); }
+  0%,100% { opacity: 0.4; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 0.7; transform: translate(-50%,-50%) scale(1.1); }
 }
 
 .hero-inner {
@@ -115,7 +115,7 @@ body {
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--accent-bright);
   border: 1px solid var(--border-blue);
-  background: rgba(34,68,255,0.08);
+  background: rgba(0,170,255,0.06);
   padding: 8px 20px; border-radius: 100px;
   margin-bottom: 18px;
   animation: fadeUp 0.7s ease 0.1s both;
@@ -136,7 +136,7 @@ body {
   line-height: 0.88;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--fg);
   margin-bottom: 4px;
   animation: fadeUp 0.8s ease 0.2s both;
 }
@@ -159,12 +159,12 @@ body {
 /* FORM CARD */
 .hero-form-card {
   width: 100%; max-width: 460px;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255,255,255,0.8);
   border: 1px solid var(--border-blue);
   border-radius: 16px;
   padding: 20px 24px 16px;
   backdrop-filter: blur(16px);
-  box-shadow: 0 0 100px rgba(34,68,255,0.18), 0 32px 64px rgba(0,0,0,0.5);
+  box-shadow: 0 0 80px rgba(0,170,255,0.1), 0 32px 64px rgba(0,0,0,0.06);
   animation: fadeUp 0.8s ease 0.5s both;
 }
 
@@ -172,10 +172,10 @@ body {
   display: flex; flex-direction: column; width: 100%;
 }
 .hero-form input {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.03);
   border: 1px solid var(--border);
   border-radius: 10px;
-  color: #fff; font-family: var(--body);
+  color: var(--fg); font-family: var(--body);
   font-size: 14px; font-weight: 400;
   padding: 11px 16px; outline: none;
   width: 100%; margin-bottom: 8px;
@@ -185,7 +185,7 @@ body {
 .hero-form input::placeholder { color: var(--muted); }
 .hero-form input:focus {
   border-color: var(--accent-bright);
-  background: rgba(77,106,255,0.07);
+  background: rgba(0,170,255,0.04);
 }
 .hero-form button {
   width: 100%; margin-top: 4px;
@@ -281,7 +281,7 @@ body {
   width: 2px; height: 0; background: var(--accent-bright);
   transition: height 0.4s ease;
 }
-.rc-belief-card:hover { background: rgba(34,68,255,0.05); }
+.rc-belief-card:hover { background: rgba(0,170,255,0.04); }
 .rc-belief-card:hover::before { height: 100%; }
 .rc-belief-num {
   font-family: var(--mono); font-size: 10px;
@@ -291,7 +291,7 @@ body {
 .rc-belief-title {
   font-family: var(--display);
   font-size: 28px; letter-spacing: 0.05em; text-transform: uppercase;
-  color: #fff; margin-bottom: 14px;
+  color: var(--fg); margin-bottom: 14px;
 }
 .rc-belief-body {
   font-size: 14px; font-weight: 300;
@@ -313,7 +313,7 @@ body {
   font-family: var(--display);
   font-size: clamp(48px, 5vw, 72px);
   color: var(--accent-bright); letter-spacing: 0.02em;
-  text-shadow: 0 0 60px var(--accent-strong);
+  text-shadow: 0 0 40px var(--accent-strong);
 }
 .rc-stat-label {
   font-family: var(--mono); font-size: 10px;
@@ -335,7 +335,7 @@ body {
   letter-spacing: 0.03em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 24px;
 }
-.rc-manifesto-right p strong { color: #fff; font-weight: 400; }
+.rc-manifesto-right p strong { color: var(--fg); font-weight: 400; }
 
 /* JOIN */
 .rc-join-section {
@@ -358,7 +358,7 @@ body {
   font-size: clamp(60px, 9vw, 140px);
   font-weight: 400; line-height: 0.9;
   letter-spacing: 0.02em; text-transform: uppercase;
-  color: #fff; margin-bottom: 20px;
+  color: var(--fg); margin-bottom: 20px;
 }
 .rc-join-headline .line-accent {
   display: block; color: transparent;
@@ -383,6 +383,7 @@ body {
   font-family: var(--display); font-size: 22px;
   letter-spacing: 0.1em; text-transform: uppercase;
   margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+  color: var(--fg);
 }
 .rc-footer-tagline {
   font-size: 13px; color: var(--fg-dim); margin-bottom: 20px;
@@ -404,7 +405,7 @@ body {
   color: var(--fg-dim); text-decoration: none;
   margin-bottom: 8px; transition: color 0.2s;
 }
-.rc-footer-col a:hover { color: #fff; }
+.rc-footer-col a:hover { color: var(--fg); }
 .rc-footer-bottom {
   padding: 20px 56px; border-top: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
@@ -414,7 +415,7 @@ body {
   color: var(--muted); letter-spacing: 0.1em;
 }
 .rc-footer-bottom a { color: var(--muted); text-decoration: none; }
-.rc-footer-bottom a:hover { color: #fff; }
+.rc-footer-bottom a:hover { color: var(--fg); }
 
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
