@@ -7,12 +7,12 @@
   --fg:            #ffffff;
   --fg-dim:        #8888aa;
   --muted:         #44445a;
-  --accent:        #2244ff;
-  --accent-bright: #4d6aff;
-  --accent-glow:   rgba(34,68,255,0.2);
-  --accent-strong: rgba(34,68,255,0.5);
+  --accent:        #0099ee;
+  --accent-bright: #00aaff;
+  --accent-glow:   rgba(0,170,255,0.2);
+  --accent-strong: rgba(0,170,255,0.5);
   --border:        rgba(255,255,255,0.06);
-  --border-blue:   rgba(77,106,255,0.35);
+  --border-blue:   rgba(0,170,255,0.35);
   --display: 'Bebas Neue', sans-serif;
   --body:    'Inter', sans-serif;
   --mono:    'DM Mono', monospace;
