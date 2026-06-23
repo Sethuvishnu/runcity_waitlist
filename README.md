@@ -1,16 +1,58 @@
-# React + Vite
+# Runcity — Waitlist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Your city. Your run. Your character.**
 
-Currently, two official plugins are available:
+Runcity is a gamified running app where your daily runs shape your in-game character. Run consistently and your character gets stronger, faster, and more powerful. Skip days, and they show it. Real effort. Real consequences. Real motivation.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## What is Runcity?
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Most running apps track your data. Runcity makes it mean something.
 
-## Expanding the ESLint configuration
+- 🏃 **Run daily** → your character levels up, gains strength, unlocks rewards
+- 🛋️ **Skip days** → your character physically changes to reflect it
+- 🏙️ **Compete city-wide** → leaderboards based on where you actually live and run
+- 🪙 **Earn coins** → rack up in-app currency just by logging runs
+- 🎟️ **Runcity Pass** → premium perks for runners who go the extra mile
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+It's the running app that holds you accountable in a way a streak counter never could.
+
+---
+
+## Status
+
+Runcity is currently in development. We're building the MVP and looking for early runners to help shape the product before launch.
+
+**This repo is for the waitlist frontend only** — the app source is not open source.
+
+---
+
+## Early Access
+
+Sign up at **[runcity-waitlist.vercel.app](https://runcity-waitlist.vercel.app)** to get early access when we launch.
+
+Early access members get:
+- First in line when the app drops
+- Influence over features before the public launch
+- Exclusive early adopter perks inside the app
+
+---
+
+## Built With
+
+- **Frontend** — deployed on Vercel
+- **Backend** — Firebase + Firestore
+- **Domain** — runcity.xyz
+
+---
+
+## Contributing
+
+This is a waitlist repo, not the main app. If you find a bug with the waitlist page or have a suggestion, feel free to open an issue.
+
+---
+
+## Contact
+
+Built by [@sethuvishnu](https://github.com/sethuvishnu) · [runcity.xyz](https://runcity.xyz)
