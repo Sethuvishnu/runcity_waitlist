@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const API = import.meta.env.VITE_API_URL || "https://runcity-waitlist.onrender.com";
 
@@ -6,13 +6,21 @@ export default function WaitlistForm({ buttonLabel = "Join the waitlist", onSucc
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [loadingPhase, setLoadingPhase] = useState("idle"); // "idle" | "spinning" | "almost"
   const [message, setMessage] = useState({ text: "", type: "" });
+  const timerRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
+
     setSubmitting(true);
+    setLoadingPhase("spinning");
     setMessage({ text: "", type: "" });
+
+    timerRef.current = setTimeout(() => {
+      setLoadingPhase("almost");
+    }, 3500);
 
     try {
       const res = await fetch(`${API}/waitlist`, {
@@ -33,6 +41,8 @@ export default function WaitlistForm({ buttonLabel = "Join the waitlist", onSucc
     } catch {
       setMessage({ text: "Connection error. Try again.", type: "error" });
     } finally {
+      clearTimeout(timerRef.current);
+      setLoadingPhase("idle");
       setSubmitting(false);
     }
   };
@@ -60,12 +70,11 @@ export default function WaitlistForm({ buttonLabel = "Join the waitlist", onSucc
         autoComplete="off"
       />
 
-      {/* ✅ Button with spinner */}
       <button type="submit" disabled={submitting} className={submitting ? "btn-loading" : ""}>
         {submitting ? (
           <>
             <span className="btn-spinner" />
-            Joining...
+            {loadingPhase === "almost" ? "Almost done, saving…" : "Joining..."}
           </>
         ) : buttonLabel}
       </button>
