@@ -369,7 +369,7 @@ export default function App() {
         </div>
         <div className="rc-footer-col">
           <h4>Contact</h4>
-          <a href="mailto:getruncityapp@gmail.com">getruncityapp@gmail.com</a>
+          <a href="mailto:app@runcity.xyz">app@runcity.xyz</a>
           <a href="/privacy-policy">Privacy Policy</a>
           <a href="/terms-of-service">Terms of Service</a>
         </div>
