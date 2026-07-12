@@ -89,7 +89,7 @@ body {
   flex-direction: column;
   align-items: center;
   image-rendering: pixelated;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.4s ease, filter 0.4s ease;
 }
 
 .pc-head {
@@ -98,6 +98,7 @@ body {
   border: 2px solid #000;
   border-radius: 2px;
   position: relative; z-index: 2;
+  transition: background 0.4s ease;
 }
 .pc-head::before {
   content: '';
@@ -106,6 +107,7 @@ body {
   width: 5px; height: 5px;
   background: #000;
   box-shadow: 10px 0 0 #000;
+  transition: top 0.3s ease;
 }
 .pc-head::after {
   content: '';
@@ -114,6 +116,7 @@ body {
   width: 14px; height: 3px;
   background: #000;
   border-radius: 0 0 3px 3px;
+  transition: border-radius 0.3s ease, transform 0.3s ease;
 }
 
 .pc-body {
@@ -148,26 +151,38 @@ body {
   100%{ opacity: 0;   transform: translateY(8px); }
 }
 
-.pc-belly {
+/* "zzz" sleep marker for the resting/low-energy state */
+.pc-zzz {
   position: absolute;
-  bottom: 34px; left: 50%;
-  transform: translateX(-50%);
-  width: 44px; height: 18px;
-  background: #FFCC99;
-  border: 2px solid #000;
-  border-radius: 50%;
-  z-index: 3;
+  top: -10px; right: -10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  z-index: 4;
+  animation: zzz-float 2.4s ease-in-out infinite;
+}
+.pc-zzz::before { content: 'z'; }
+@keyframes zzz-float {
+  0%   { opacity: 0;   transform: translateY(0) scale(0.8); }
+  30%  { opacity: 0.8; }
+  100% { opacity: 0;   transform: translateY(-14px) scale(1.2); }
 }
 
-/* Chubby */
-.pixel-char--chubby .pc-head  { width: 32px; height: 32px; background: #FFAA77; }
-.pixel-char--chubby .pc-body  { width: 48px; height: 44px; background: #ff8a80; border-radius: 4px; }
-.pixel-char--chubby .pc-leg   { width: 16px; }
-.pixel-char--chubby            { animation: wobble 1.2s infinite ease-in-out; }
-
-@keyframes wobble {
-  0%, 100% { transform: rotate(-1deg); }
-  50%       { transform: rotate(1deg); }
+/* Resting — low energy, no body-shape change. Dimmed, slouched, still. */
+.pixel-char--resting {
+  opacity: 0.7;
+  filter: grayscale(45%);
+  transform: translateY(2px);
+}
+.pixel-char--resting .pc-head::before {
+  top: 11px; /* eyes droop slightly, sleepy not sad */
+}
+.pixel-char--resting .pc-head::after {
+  border-radius: 3px 3px 0 0; /* neutral/flat mouth instead of a smile */
+  transform: translateY(1px);
+}
+.pixel-char--resting .pc-body {
+  background: var(--muted);
 }
 
 /* Running */
@@ -215,7 +230,7 @@ body {
   line-height: 1.4;
 }
 
-/* ── CALORIE BAR ── */
+/* ── ENERGY BAR ── */
 .cal-bar-wrap {
   display: flex; align-items: center; gap: 6px; width: 100%;
 }
@@ -289,7 +304,7 @@ body {
   backdrop-filter: blur(8px);
 }
 .char-card--fit  { border-color: rgba(0,200,83,0.35); }
-.char-card--bad  { border-color: rgba(255,59,59,0.35); }
+.char-card--bad  { border-color: rgba(26,74,255,0.35); }
 
 .char-label {
   font-family: var(--mono); font-size: 10px;
@@ -297,8 +312,8 @@ body {
   padding: 3px 8px; border: 1px solid;
   text-transform: uppercase;
 }
-.char-label--good { color: var(--green);  border-color: var(--green); }
-.char-label--bad  { color: var(--red);    border-color: var(--red); }
+.char-label--good { color: var(--green);         border-color: var(--green); }
+.char-label--bad  { color: var(--accent-bright);  border-color: var(--accent-bright); }
 
 .char-vs {
   font-family: var(--display);
@@ -469,7 +484,7 @@ body {
 }
 .how-step-body { font-size: 13px; font-weight: 300; color: var(--fg-dim); line-height: 1.7; }
 
-/* ── STAKES ── */
+/* ── REWARDS (formerly "stakes") ── */
 .rc-stakes-section { background: var(--bg); max-width: 100%; padding: 100px 48px; }
 .rc-stakes-section .rc-label,
 .rc-stakes-section .stakes-compare {
@@ -488,14 +503,14 @@ body {
   align-items: center; gap: 20px; text-align: center;
 }
 .stakes-col--run  { border: 1px solid rgba(0,200,83,0.2); }
-.stakes-col--lazy { border: 1px solid rgba(255,59,59,0.2); }
+.stakes-col--lazy { border: 1px solid var(--border); }
 .stakes-header {
   font-family: var(--display); font-size: 28px; letter-spacing: 2px;
   text-transform: uppercase;
 }
 .stakes-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; text-align: left; width: 100%; }
-.stakes-col--run  li { color: var(--green); font-size: 13px; font-family: var(--mono); letter-spacing: 0.05em; }
-.stakes-col--lazy li { color: var(--red);   font-size: 13px; font-family: var(--mono); letter-spacing: 0.05em; }
+.stakes-col--run  li { color: var(--green);  font-size: 13px; font-family: var(--mono); letter-spacing: 0.05em; }
+.stakes-col--lazy li { color: var(--fg-dim); font-size: 13px; font-family: var(--mono); letter-spacing: 0.05em; }
 
 /* ── STATS BAR ── */
 .rc-stats-bar {
