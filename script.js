@@ -5,7 +5,7 @@ const CALENDAR_URL  = "";   // e.g. your booking link
 /* ---------- HERO VIDEO: put your best work in the opening card ----------
    1. Save the file in the video/ folder (MP4, H.264, 1080p, ideally under 10 MB).
    2. Set the path below. Leave it empty to keep the default card. */
-const HERO_VIDEO  = "superdooper_main_1.mp4";   // e.g. "video/work.mp4"
+const HERO_VIDEO  = "superdooper_main_small.mp4";   // e.g. "video/work.mp4"
 const HERO_POSTER = "";   // optional still image shown first, e.g. "video/work.jpg"
 (function () {
   if (!HERO_VIDEO) return;
